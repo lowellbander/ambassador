@@ -1,2 +1,2 @@
-ambassador-server
+ambassador
 =================
