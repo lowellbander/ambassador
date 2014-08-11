@@ -16,10 +16,12 @@ def print_tours():
                                         'email', 'phone', 'comment', 'major', 'nPeople'])
 
         crossed_timeline = False
+        nMorning = 0
+        nAfternoon = 0
         print "~~~~ 10:00am ~~~~"
         print ""
         for family in doc:
-            if family['date'] == '11':
+            if family['date'] == '13':
                 #print family
                 print "Name: %s" % family['name']
                 print "Email: %s" % family['email']
@@ -28,11 +30,17 @@ def print_tours():
                     print "Comments: %s" % family['comment']
                 print "Major of Interest: %s" % family['major']
                 print "Number of People: %s" % family['nPeople']
+                if crossed_timeline:
+                    nAfternoon += int(family['nPeople'])
+                else:
+                    nMorning += int(family['nPeople'])
                 if not crossed_timeline and family['time'] == '1 PM':
                     crossed_timeline = True
                     print ""
                     print "~~~~ 1:00pm ~~~~"
                 print ""
+        print "Morning tour has %i people" % nMorning
+        print "Afternoon tour has %i people" % nAfternoon
 
 def init_amb():
     ambassadors = []
