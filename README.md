@@ -14,3 +14,10 @@ An automation tool for the UCLA Engineering Ambassadors.
 * make public front end responsive
 * make private front end responsive
 * make private front end into app
+
+#planning
+Create Ambassador models ([full] name, email, thumbnail)
+then create some sort of structure to assign Ambassadors to time slots
+right now there there's only 6: (Morning, Afternoon) x (Mon, Weds, Thurs)
+Maybe just create a TourSlot model? (dayofweek, timeofday, Primaries*, Backups)
+List of Ambassadors on lefthand side, support drag and drop + typehead
