@@ -1,4 +1,5 @@
 import csv
+import sys
 from collections import defaultdict
 
 class Ambassador:
@@ -10,7 +11,17 @@ class Ambassador:
     def __str__(self):
         print "%s can be contacted using %s" % (self.name, self.email)
 
+def usage():
+    print "Usage: %s <date>" % sys.argv[0]
+
 def print_tours():
+
+    if len(sys.argv) is not 2:
+        usage()
+        return
+
+    date = sys.argv[1]
+
     with open ('tour.csv', 'r') as handle:
         doc = csv.DictReader(handle, ['blank', 'date', 'name', 'time',
                                         'email', 'phone', 'comment', 'major', 'nPeople'])
@@ -21,7 +32,7 @@ def print_tours():
         print "~~~~ 10:00am ~~~~"
         print ""
         for family in doc:
-            if family['date'] == '13':
+            if family['date'] == date:
                 #print family
                 print "Name: %s" % family['name']
                 print "Email: %s" % family['email']
