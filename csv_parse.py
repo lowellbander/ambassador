@@ -16,13 +16,14 @@ def usage():
 
 def print_tours():
 
-    if len(sys.argv) is not 2:
+    if len(sys.argv) is not 3:
         usage()
         return
 
-    date = sys.argv[1]
+    document = sys.argv[1]
+    date = sys.argv[2]
 
-    with open ('tour.csv', 'r') as handle:
+    with open (document, 'r') as handle:
         doc = csv.DictReader(handle, ['blank', 'date', 'name', 'time',
                                         'email', 'phone', 'comment', 'major', 'nPeople'])
 
@@ -50,6 +51,7 @@ def print_tours():
                     print ""
                     print "~~~~ 1:00pm ~~~~"
                 print ""
+        print "\n==========================="
         print "Morning tour has %i people" % nMorning
         print "Afternoon tour has %i people" % nAfternoon
 
