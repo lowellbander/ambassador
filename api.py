@@ -1,15 +1,25 @@
+
 from pprint import pprint
 import csv
 import json
 import settings
 import sys
 import unirest
-from api import post
 
 HEADERS = {'Accept':'application/json', 'Content-Type': 'application-json'}
 
 def usage():
     print "Usage: %s <tour.csv>" % sys.argv[0]
+
+def get_all():
+    response = unirest.get(settings.API_URL + 'tour/')
+    return response.body
+
+def post(tour):
+    response = unirest.post(settings.API_URL + 'tour/', headers = HEADERS,
+                                                params = json.dumps(tour))
+    return response.body
+
 
 def main():
 
