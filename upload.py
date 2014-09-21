@@ -22,14 +22,21 @@ def main():
     with open(document, 'r') as handle:
         doc = csv.DictReader(handle, ['blank', 'date', 'name', 'time',
                                     'email', 'phone', 'comment', 'major', 'nPeople'])
+
+        remaining = 4
         for family in doc:
-            print family
+
+            #skip the first 4 lines
+            if remaining is not 0:
+                remaining -= 1
+                continue
+
             tour = {'date': family['date'] + " " + family['time'],
                     'name': family['name'],
                     'email': family['email'],
                     'phone': family['phone'],
-                    'comment': family['comment'],
-                    'major_of_interest': family['major'],
+                    'comments': family['comment'],
+                    'majors_of_interest': family['major'],
                     'nVisitors': family['nPeople']}
             pprint(post(tour))
 
