@@ -31,12 +31,16 @@ def main():
                 remaining -= 1
                 continue
 
-            tour = {'date': family['date'] + " " + family['time'],
+            #skip empty rows
+            if family['date'] == '':
+                continue
+
+            tour = {'date': 'October '+ family['date'] + " " + family['time'],
                     'name': family['name'],
                     'email': family['email'],
                     'phone': family['phone'],
                     'comments': family['comment'],
-                    'majors_of_interest': family['major'],
+                    'majorsOfInterest': family['major'],
                     'nVisitors': family['nPeople']}
             pprint(post(tour))
 
