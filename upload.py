@@ -1,9 +1,6 @@
 from pprint import pprint
 import csv
-import json
-import settings
 import sys
-import unirest
 from api import post
 
 HEADERS = {'Accept':'application/json', 'Content-Type': 'application-json'}
@@ -20,9 +17,9 @@ def main():
     document = sys.argv[1]
 
     with open(document, 'r') as handle:
-        doc = csv.DictReader(handle, ['blank', 'date', 'name', 'time',
-                                    'email', 'phone', 'comment', 'major', 'nPeople'])
-
+        headers = ['blank', 'date', 'name', 'time', 'email', 'phone']
+        headers.extend(['comment', 'major', 'nPeople'])
+        doc = csv.DictReader(handle, headers)
         remaining = 4
         for family in doc:
 
@@ -35,13 +32,14 @@ def main():
             if family['date'] == '':
                 continue
 
-            tour = {'date': 'October '+ family['date'] + " " + family['time'],
-                    'name': family['name'],
-                    'email': family['email'],
-                    'phone': family['phone'],
-                    'comments': family['comment'],
-                    'majorsOfInterest': family['major'],
-                    'nVisitors': family['nPeople']}
+            tour = {}
+            tour['date'] = 'November ' + family['date'] + " " + family['time']
+            tour['name'] = family['name']
+            tour['email'] = family['email']
+            tour['phone'] = family['phone']
+            tour['comments'] = family['comment']
+            tour['majorsOfInterest'] = family['major']
+            tour['nVisitors'] = family['nPeople']
             pprint(post(tour))
 
 if __name__ == "__main__":
